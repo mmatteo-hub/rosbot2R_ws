@@ -15,7 +15,7 @@ All the files are setup with a namespace (`robot_0` in this case), becuase there
 * [start_pkg](/start_pkg/):
     * [start.launch](/start_pkg/launch/start.launch): `robot_ns` line 3
 * [rosbot_navigation](/rosbot_navigation/):
-    * [costmap_common_params.yaml]/rosbot_navigation/config/costmap_common_params.yaml): change the namespace of the following parameters:
+    * [costmap_common_params.yaml](/rosbot_navigation/config/costmap_common_params.yaml): change the namespace of the following parameters:
         * `map_topic`: line 4
         * `laser_scan_sensor`: `sensor_frame` and `topic` line 7
         * `robot_base_frame`: line 9

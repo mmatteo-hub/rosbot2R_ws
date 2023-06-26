@@ -1,0 +1,52 @@
+<launch>
+
+    <arg name="robot_ns" default="robot_0"/>
+
+    <arg name="rosbot_pro" default="false" />
+    <arg name="use_gazebo" default="false" />
+
+    <arg name="teach" default="true"/>
+    <arg name="recognize" default="false"/>
+
+    <arg if="$(arg teach)" name="chosen_world" value="rosbot_world_teaching"/>
+    <arg if="$(arg recognize)" name="chosen_world" value="rosbot_world_recognition"/>
+
+    <group ns="$(arg robot_ns)">
+        <!-- Gazebo -->
+        <group if="$(arg use_gazebo)">
+            <include file="$(find rosbot_gazebo)/launch/$(arg chosen_world).launch"/>
+            <include file="$(find rosbot_description)/launch/rosbot_gazebo.launch"/>
+                <param name="use_sim_time" value="true" />
+        </group>
+        
+        <!-- ROSbot 2.0 -->
+        <group unless="$(arg use_gazebo)">
+            <param name="tf_prefix" type="string" value="$(arg robot_ns)"/>
+            <include file="$(find rosbot_ekf)/launch/all.launch">
+                <arg name="namespace" value="$(arg robot_ns)" />
+            </include>
+
+            <include file="$(find rplidar_ros)/launch/rplidar.launch">
+                <arg name="namespace" value="$(arg robot_ns)" />
+            </include>
+
+        </group>
+
+        <node unless="$(arg use_gazebo)" pkg="tf" type="static_transform_publisher" name="camera_publisher" args="-0.03 0 0.18 0 0 0 $(arg robot_ns)/base_link $(arg robot_ns)/camera_link 100" />
+    
+        <param name="tf_prefix" type="string" value="$(arg robot_ns)"/>
+        <rosparam command="load" file="$(find joint_state_controller)/joint_state_controller.yaml" />
+        <node name="joint_state_controller_spawner" pkg="controller_manager" type="spawner" output="screen" args="joint_state_controller" />
+    
+        <param name="robot_description" command="$(find xacro)/xacro '$(find rosbot_description)/urdf/rosbot.xacro'"/>
+
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" respawn="false" output="screen"/>
+        
+        <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+
+        <include file="$(find start_pkg)/src/launch/move_base.launch">
+            <arg name="namespace" value="$(arg robot_ns)"/>
+        </include>
+    </group>
+
+</launch>

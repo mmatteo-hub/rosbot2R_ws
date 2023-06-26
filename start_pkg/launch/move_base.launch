@@ -1,0 +1,16 @@
+<launch>
+    <arg name="namespace"/>
+        <node pkg="move_base" type="move_base" respawn="false" name="move_base_node" output="screen">
+        
+        <rosparam file="$(find rosbot_navigation)/config/$(arg namespace)/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find rosbot_navigation)/config/$(arg namespace)/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find rosbot_navigation)/config/$(arg namespace)/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find rosbot_navigation)/config/$(arg namespace)/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find rosbot_navigation)/config/$(arg namespace)/trajectory_planner.yaml" command="load" />
+
+        <param name="max_planning_retries" value="1"/>
+        <param name="recovery_behavior_enabled" value="true"/>
+        <rosparam file="$(find rosbot_navigation)/config/$(arg namespace)/recovery_behaviors.yaml" command="load" />
+
+    </node>
+</launch>

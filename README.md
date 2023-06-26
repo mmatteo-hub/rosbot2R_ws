@@ -2,7 +2,7 @@
 This folder contains the files for starting the sensors of the [ROSbot 2R](https://husarion.com/manuals/rosbot/), from [Husarion](https://husarion.com/). <br>
 This [README](/README.md) contains the instructions to setup the ROSbot and to make it usable when launching ROS among multiple machine. It is also shown how to broadcast the time over the Wi-Fi in order to have all the agents synchronised with the master. <br><br>
 
-The [folder](/src/) of the workspace has to be put in the `ros_ws` of each robot needed and properly built through `catkin_make`.
+The `folder` of the workspace has to be put in the `ros_ws` of each robot needed and properly built through `catkin_make`.
 
 ## ROSbot start packaged
 The starting packages can be download from the official [Github Page](https://github.com/husarion/). <br>
@@ -12,15 +12,15 @@ In particular the packages needed are:
 
 ### IMPORTANT
 All the files are setup with a namespace (`robot_0` in this case), becuase there was the need to use multiple robots of the same type. Remeber to change the files parameter and the folder names, in particular:
-* [start_pkg](/src/start_pkg/):
-    * [start.launch](/src/start_pkg/launch/start.launch): `robot_ns` line 3
-* [rosbot_navigation](/src/rosbot_navigation/):
-    * [costmap_common_params.yaml](/src/rosbot_navigation/config/costmap_common_params.yaml): change the namespace of the following parameters:
+* [start_pkg](/start_pkg/):
+    * [start.launch](/start_pkg/launch/start.launch): `robot_ns` line 3
+* [rosbot_navigation](/rosbot_navigation/):
+    * [costmap_common_params.yaml]/rosbot_navigation/config/costmap_common_params.yaml): change the namespace of the following parameters:
         * `map_topic`: line 4
         * `laser_scan_sensor`: `sensor_frame` and `topic` line 7
         * `robot_base_frame`: line 9
         * `map_topic`: line 13
-    * [exploration.yaml](/src/rosbot_navigation/config/exploration.yaml): change the namespace of the following parameters:
+    * [exploration.yaml](/rosbot_navigation/config/exploration.yaml): change the namespace of the following parameters:
         * `robot_base_frame`: line 7
         * `map_topic`: line 14
 

@@ -11,16 +11,18 @@ In particular the packages needed are:
 * [rosbot_description](https://github.com/husarion/rosbot_description)
 
 ### IMPORTANT
-All the files are setup with a namespace (`robot_0` in this case), becuase there was the need to use multiple robots of the same type. Remeber to change the files parameter and the folder names, in particular:
+All the files are setup with a namespace (`robot_0` in this case), becuase there was the need to use multiple robots of the same type. Remeber to change the files parameter and the folder names. <br>
+The files in the [rosbot_navigation] need the namespace `robot_i` addition to the existing name. Be careful to not add `/` in front of the name if not alredy present.
+n particular:
 * [start_pkg](/start_pkg/):
     * [start.launch](/start_pkg/launch/start.launch): `robot_ns` line 3
-* [rosbot_navigation](/rosbot_navigation/):
-    * [costmap_common_params.yaml](/rosbot_navigation/config/costmap_common_params.yaml): change the namespace of the following parameters:
+* [rosbot_navigation](https://github.com/husarion/rosbot_description/tree/master/src/rosbot_navigation):
+    * [costmap_common_params.yaml](https://github.com/husarion/rosbot_description/blob/master/src/rosbot_navigation/config/costmap_common_params.yaml): change the namespace of the following parameters:
         * `map_topic`: line 4
         * `laser_scan_sensor`: `sensor_frame` and `topic` line 7
         * `robot_base_frame`: line 9
         * `map_topic`: line 13
-    * [exploration.yaml](/rosbot_navigation/config/exploration.yaml): change the namespace of the following parameters:
+    * [exploration.yaml](https://github.com/husarion/rosbot_description/blob/master/src/rosbot_navigation/config/exploration.yaml): change the namespace of the following parameters:
         * `robot_base_frame`: line 7
         * `map_topic`: line 14
 

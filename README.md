@@ -1,4 +1,4 @@
-# ROSbot workspace
+# ROSbot 2R workspace
 This folder contains the files for starting the sensors of the [ROSbot 2R](https://husarion.com/manuals/rosbot/), from [Husarion](https://husarion.com/). <br>
 This [README](/README.md) contains the instructions to setup the ROSbot and to make it usable when launching ROS among multiple machine. It is also shown how to broadcast the time over the Wi-Fi in order to have all the agents synchronised with the master. <br><br>
 
